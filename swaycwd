@@ -1,0 +1,24 @@
+#!/bin/sh
+# Author: Qiu
+# License: BSD 2-Clause "Simplified" License
+# This script gets the CWD of the focued view. On error xcwd is used -
+# this allows the script to also work on xwayland views.
+# Tested on FreeBSD and Linux.
+
+# Get the view tree
+getTree() { swaymsg -t get_tree; }
+# Find the focused view in the tree
+filter() { gron | grep "focused = true" | sed 's/.focused.*$/.pid/g;s/^json//g'; }
+
+# Find the PID of the process
+PID=$(getTree | jq "$(getTree | filter)")
+
+# Print the current working directory
+if [ "$(uname)" == "FreeBSD" ]
+then
+	STAT="$(procstat -f $PID 2>/dev/null)"
+	[ "$?" -eq "0" ] && (echo "$STAT" | awk '$3 == "cwd" { print $10 }') || xcwd
+elif [ "$(uname)" == "Linux" ]
+then
+	readlink -e "/proc/$PID/cwd"
+fi
