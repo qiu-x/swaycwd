@@ -20,5 +20,5 @@ then
 	[ "$?" -eq "0" ] && (echo "$STAT" | awk '$3 == "cwd" { print $10 }') || xcwd
 elif [ "$(uname)" == "Linux" ]
 then
-	readlink -e "/proc/$PID/cwd"
+	readlink -e "/proc/$PID/cwd" 2>/dev/null || xcwd
 fi
