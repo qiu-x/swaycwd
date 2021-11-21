@@ -12,7 +12,7 @@ This is useful if you want your terminal or other programs to open in the CWD of
 The script should work on both FreeBSD and Linux.
 
 ## Usage
-Add `swaycwd` to your `$PATH` and run it like this
+Add `swaycwd` to your `$PATH` and run the command like this:
 ```
 $ swaycwd
 /usr/home/qiu
