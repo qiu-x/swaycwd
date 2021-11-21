@@ -11,7 +11,7 @@ This is useful if you want your terminal or other programs to open in the CWD of
 
 The script should work on both FreeBSD and Linux.
 
-## Running
+## Usage
 Add `swaycwd` to your `$PATH` and run it like this
 ```
 $ swaycwd
