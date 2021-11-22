@@ -8,10 +8,10 @@
 # Get the view tree
 getTree() { swaymsg -t get_tree; }
 # Find the focused view in the tree
-filter() { gron | grep "focused = true" | sed 's/.focused.*$/.pid/g;s/^json//g'; }
+filter() { jq -c 'getpath(path(.. .focused? // empty)[:-1]).pid'; }
 
 # Find the PID of the process
-PID=$(getTree | jq "$(getTree | filter)")
+PID=$(getTree | filter)
 
 # Print the current working directory
 if [ "$(uname)" == "FreeBSD" ]
