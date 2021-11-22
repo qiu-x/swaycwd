@@ -5,7 +5,6 @@ This is useful if you want your terminal or other programs to open in the CWD of
 
 ## Dependencies
 
-- `gron`
 - `jq`
 - `xcwd`
 
